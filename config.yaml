@@ -1,0 +1,34 @@
+discord:
+  token: "YOUR_DISCORD_BOT_TOKEN"
+  required_role: "Minecraft Admin"
+  command_channel: "server-commands"
+  log_channel: "server-logs"
+
+servers:
+  directory: "./servers"
+  max_concurrent: 3
+  auto_start_on_boot: true
+  default_memory: 4096
+  crash_notification: true
+  port_range:
+    min: 25565
+    max: 25665
+
+jvm:
+  default_memory: 4096
+  java_path: "/usr/bin/java"
+  java_args: "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=50 -XX:G1HeapRegionSize=8m -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1PauseIntervalMs=150 -XX:InitiatingHeapOccupancyPercent=15"
+
+curseforge:
+  api_key: null
+  timeout: 30
+
+monitoring:
+  check_interval: 10
+  restart_on_crash: true
+  max_restarts: 3
+  restart_delay: 30
+
+logging:
+  level: "INFO"
+  file: "./logs/mc-manager.log"

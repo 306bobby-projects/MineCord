@@ -1,0 +1,31 @@
+[Unit]
+Description=Minecraft Server Manager with Discord Bot
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=bobby
+WorkingDirectory=/home/bobby/mc-manager
+ExecStart=/usr/bin/python3 /home/bobby/mc-manager/main.py
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+
+RuntimeDirectory=mc-manager
+RuntimeDirectoryMode=0755
+
+LogsDirectory=mc-manager
+LogsDirectoryMode=0755
+
+StateDirectory=mc-manager
+StateDirectoryMode=0755
+
+ProtectSystem=strict
+ReadWritePaths=/home/bobby/mc-manager/servers /home/bobby/mc-manager/logs
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
