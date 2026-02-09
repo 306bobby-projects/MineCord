@@ -22,8 +22,8 @@ A comprehensive Minecraft server manager with Discord bot integration that suppo
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mc-manager.git
-cd mc-manager
+git clone https://github.com/306bobby-projects/MineCord.git
+cd MineCord
 
 # Install dependencies
 pip install -r requirements.txt
@@ -38,6 +38,10 @@ sudo systemctl daemon-reload
 sudo systemctl enable mc-manager
 sudo systemctl start mc-manager
 ```
+
+## GitHub
+
+Repository: [https://github.com/306bobby-projects/MineCord](https://github.com/306bobby-projects/MineCord)
 
 ## Configuration
 
@@ -119,12 +123,12 @@ sudo systemctl restart mc-manager
 ## Project Structure
 
 ```
-mc-manager/
+MineCord/
 ├── config.yaml           # Configuration file
 ├── main.py               # Application entry point
 ├── server_manager.py     # Server management logic
 ├── discord_bot.py        # Discord bot integration
-├── mc-manager.service    # Systemd service file
+├── mc-manager.service   # Systemd service file
 ├── requirements.txt      # Python dependencies
 └── servers/              # Server instances directory
 ```
