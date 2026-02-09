@@ -69,7 +69,8 @@ servers:
 
 | Command | Description |
 |---------|-------------|
-| `/create <name> <version\|url> [memory] [server_url]` | Create a new server |
+| `/create <name> <version> [memory]` | Create a vanilla server |
+| `/create <name> <modpack_url> [memory] [server_file_url]` | Create from CurseForge modpack |
 | `/start <name>` | Start a server |
 | `/stop <name>` | Stop a server |
 | `/restart <name>` | Restart a server |
@@ -86,12 +87,19 @@ servers:
 # Create a vanilla server
 /create myserver 1.20.1 4096
 
-# Create from CurseForge modpack
+# Create from CurseForge modpack (auto-find server pack)
 /create atm10 https://www.curseforge.com/minecraft/modpacks/all-the-mods-10
 
 # Create with custom server file URL
 /create mymodpack https://www.curseforge.com/minecraft/modpacks/some-pack 8192 https://www.curseforge.com/minecraft/modpacks/some-pack/files/1234567
 ```
+
+**Parameters:**
+- `<name>` - Unique alphanumeric server name
+- `<version>` - Minecraft version (e.g., "1.20.1")
+- `<modpack_url>` - CurseForge modpack page URL
+- `[memory]` - JVM memory in MB (optional, default from config)
+- `[server_file_url]` - Direct CurseForge server file download URL (optional, only for CurseForge)
 
 ## Adding the Bot to Your Server
 
