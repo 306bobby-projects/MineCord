@@ -38,11 +38,10 @@ class MinecraftBot(commands.Cog):
     @app_commands.describe(
         name="Unique name for the server",
         version_or_url="Minecraft version or CurseForge modpack URL",
-        memory="JVM memory allocation in MB (optional)",
-        server_url="Direct server pack download URL for CurseForge (optional)"
+        memory="JVM memory allocation in MB (optional)"
     )
     async def create_server(self, interaction: discord.Interaction, name: str, version_or_url: str, 
-                           memory: Optional[int] = None, server_url: Optional[str] = None):
+                           memory: Optional[int] = None):
         if not self.has_required_role(interaction):
             await interaction.response.send_message("❌ You don't have permission to use this command.", ephemeral=True)
             return
@@ -60,8 +59,7 @@ class MinecraftBot(commands.Cog):
                 name, 
                 "modpack", 
                 memory, 
-                version_or_url, 
-                server_url
+                version_or_url
             )
         else:
             success, message = await self.server_manager.create_server(

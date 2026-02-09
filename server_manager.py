@@ -122,7 +122,7 @@ class MinecraftServerManager:
         return True
 
     async def create_server(self, name: str, version: str, memory: Optional[int] = None, 
-                           modpack_url: Optional[str] = None, server_file_url: Optional[str] = None) -> tuple:
+                           modpack_url: Optional[str] = None) -> tuple:
         async with self.lock:
             if name in self.servers:
                 return False, f"Server '{name}' already exists"
@@ -141,7 +141,7 @@ class MinecraftServerManager:
                 memory=mem,
                 port=port,
                 modpack_url=modpack_url,
-                server_file_url=server_file_url
+                server_file_url=None
             )
             
             server_dir = self.servers_dir / name
@@ -149,10 +149,10 @@ class MinecraftServerManager:
             
             try:
                 if modpack_url:
-                    success, message = await self.download_curseforge_server(server_dir, modpack_url, server_file_url)
+                    success, message = await self.download_curseforge_server(server_dir, modpack_url)
                     if not success:
                         self.release_port(port)
-                        return False, message
+                        return False, f"{message}\n\nPlease run the command again with the direct server pack URL: /create {name} <server_file_url>"
                 else:
                     await self.download_vanilla_server(server_dir, version)
                 
@@ -169,16 +169,12 @@ class MinecraftServerManager:
                 self.release_port(port)
                 return False, f"Failed to create server: {str(e)}"
 
-    async def download_curseforge_server(self, server_dir: Path, modpack_url: str, 
-                                        server_file_url: Optional[str] = None) -> tuple:
+    async def download_curseforge_server(self, server_dir: Path, modpack_url: str) -> tuple:
         try:
             async with aiohttp.ClientSession() as session:
-                if server_file_url:
-                    download_url = server_file_url
-                else:
-                    download_url = await self.find_curseforge_serverpack(session, modpack_url)
-                    if not download_url:
-                        return False, "Could not find server pack. Please provide direct server pack download link."
+                download_url = await self.find_curseforge_serverpack(session, modpack_url)
+                if not download_url:
+                    return False, "Could not find server pack on CurseForge page"
                 
                 logger.info(f"Downloading server pack from {download_url}")
                 async with session.get(download_url) as response:

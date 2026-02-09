@@ -69,8 +69,9 @@ servers:
 
 | Command | Description |
 |---------|-------------|
-| `/create <name> <version> [memory]` | Create a vanilla server |
-| `/create <name> <modpack_url> [memory] [server_file_url]` | Create from CurseForge modpack |
+| `/create <name> <version>` | Create a vanilla server with version |
+| `/create <name> <modpack_url>` | Create from CurseForge modpack |
+| `/create <name> <modpack_url> <memory>` | Create from CurseForge with custom memory |
 | `/start <name>` | Start a server |
 | `/stop <name>` | Stop a server |
 | `/restart <name>` | Restart a server |
@@ -85,21 +86,22 @@ servers:
 
 ```bash
 # Create a vanilla server
-/create myserver 1.20.1 4096
+/create myserver 1.20.1
 
-# Create from CurseForge modpack (auto-find server pack)
+# Create a vanilla server with custom memory
+/create myserver 1.20.1 8192
+
+# Create from CurseForge modpack
 /create atm10 https://www.curseforge.com/minecraft/modpacks/all-the-mods-10
 
-# Create with custom server file URL
-/create mymodpack https://www.curseforge.com/minecraft/modpacks/some-pack 8192 https://www.curseforge.com/minecraft/modpacks/some-pack/files/1234567
+# Create from CurseForge modpack with custom memory
+/create atm10 https://www.curseforge.com/minecraft/modpacks/all-the-mods-10 8192
 ```
 
-**Parameters:**
-- `<name>` - Unique alphanumeric server name
-- `<version>` - Minecraft version (e.g., "1.20.1")
-- `<modpack_url>` - CurseForge modpack page URL
-- `[memory]` - JVM memory in MB (optional, default from config)
-- `[server_file_url]` - Direct CurseForge server file download URL (optional, only for CurseForge)
+**Note:** If CurseForge server pack cannot be found automatically, run the command with the direct server file URL:
+```bash
+/create <name> <server_file_url>
+```
 
 ## Adding the Bot to Your Server
 
